@@ -5,10 +5,6 @@ export var MOVE_SPEED = 100
 export var SPRINT_MULTIPLIER = 3
 
 
-func _process(delta):
-	pass
-
-
 func _physics_process(delta):
 	var speed = MOVE_SPEED
 	var move_vec = Vector2()

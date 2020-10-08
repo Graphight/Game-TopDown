@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Resources/Terrain/tileset_source.png" type="Texture" id=1]
+
+[node name="World" type="Node2D"]
+
+[node name="Grass" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 17, 442, 16, 16 )
+
+[node name="Dirt" type="Sprite" parent="."]
+position = Vector2( 32, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 187, 442, 16, 16 )
+
+[node name="Sand" type="Sprite" parent="."]
+position = Vector2( 56, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 102, 408, 16, 16 )
+
+[node name="Road" type="Sprite" parent="."]
+position = Vector2( 8, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 187, 323, 16, 16 )
