@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 export var MOVE_SPEED = 100
-export var SPRINT_MULTIPLIER = 3
+export var SPRINT_MULTIPLIER = 1.75
 
 
 func _physics_process(delta):
