@@ -6,8 +6,8 @@ export var DETECTION_RADIUS = 160
 
 onready var timer = $Timer
 onready var sensor = $Sensor
+onready var target_pos = global_position
 
-var target = null
 var stance = "idle"
 var rng = RandomNumberGenerator.new()
 var vec_to_target = Vector2()
@@ -23,7 +23,14 @@ func _process(delta):
 
 func _physics_process(delta):	
 	if stance == "hunting":
-		vec_to_target = target.global_position - global_position
+		# Move toward target
+		vec_to_target = target_pos - global_position
+	else:
+		# Move toward last seen place of target then stop
+		if target_pos != global_position:
+			vec_to_target = target_pos - global_position
+		else:
+			vec_to_target = Vector2()
 	
 	vec_to_target = vec_to_target.normalized()
 	var collision_entity = move_and_collide(vec_to_target * MOVE_SPEED * delta, false, true, false)
@@ -34,13 +41,13 @@ func _draw():
 
 func _on_Sensor_body_entered(body):
 	if body.name == "Player":
-		target = body
+		target_pos = body.position
 		stance = "hunting"
 
 
 func _on_Sensor_body_exited(body):
 	if body.name == "Player":
-		target = null
+		target_pos = body.position
 		stance = "idle"
 
 
