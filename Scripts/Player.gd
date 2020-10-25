@@ -4,6 +4,8 @@ extends KinematicBody2D
 export var MOVE_SPEED = 100
 export var SPRINT_MULTIPLIER = 1.75
 
+var sound_source = preload("res://Scenes/Misc/SoundSource.tscn")
+
 
 func _physics_process(delta):
 	var speed = MOVE_SPEED
@@ -24,3 +26,10 @@ func _physics_process(delta):
 		speed = MOVE_SPEED
 	
 	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		var sound_instance = preload("res://Scenes/Misc/SoundSource.tscn").instance()
+		sound_instance.position = event.position
+		add_child(sound_source)
