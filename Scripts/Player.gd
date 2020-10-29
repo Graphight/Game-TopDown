@@ -5,6 +5,10 @@ export var MOVE_SPEED = 100
 export var SPRINT_MULTIPLIER = 1.75
 
 
+func _process(delta):
+	look_at(get_global_mouse_position())
+
+
 func _physics_process(delta):
 	var speed = MOVE_SPEED
 	var move_vec = Vector2()
