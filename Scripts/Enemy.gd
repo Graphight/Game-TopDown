@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 export var MOVE_SPEED = 50
 export var DETECTION_RADIUS = 160
+export var HIT_POINTS = 10
 
 onready var sensor = $Sensor
 onready var target_pos = global_position
@@ -10,6 +11,7 @@ onready var target_pos = global_position
 var target = null
 var stance = "idle"
 var vec_to_target = Vector2()
+var additional_forces = Vector2()
 
 
 func _ready():
@@ -20,7 +22,8 @@ func _process(delta):
 	update()
 
 
-func _physics_process(delta):	
+func _physics_process(delta):
+	
 	if stance == "fighting":
 		# Move toward target
 		vec_to_target = target_pos - global_position
@@ -35,6 +38,11 @@ func _physics_process(delta):
 			vec_to_target = Vector2()
 	
 	vec_to_target = vec_to_target.normalized()
+	
+	if not additional_forces == Vector2():
+		vec_to_target += additional_forces
+		additional_forces = Vector2()
+	
 	var collision_entity = move_and_collide(vec_to_target * MOVE_SPEED * delta, false, true, false)
 
 
@@ -47,6 +55,17 @@ func _draw():
 	draw_line(Vector2(), target_pos - global_position, line_colour, 3)
 	
 	draw_circle(Vector2(), DETECTION_RADIUS, line_colour - Color(0.0, 0.0, 0.0, 0.5))
+
+
+func kill():
+	queue_free()
+
+
+func damage(value, bullet_force):
+	additional_forces = bullet_force
+	HIT_POINTS -= value
+	if HIT_POINTS <= 0:
+		kill()
 
 
 func _on_Sensor_body_entered(body):

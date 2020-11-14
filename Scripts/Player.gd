@@ -28,3 +28,6 @@ func _physics_process(delta):
 		speed = MOVE_SPEED
 	
 	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
+
+
+
