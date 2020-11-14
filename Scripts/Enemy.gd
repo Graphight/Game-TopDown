@@ -55,7 +55,7 @@ func _draw():
 		line_colour = Color(1.0, 0.0, 0.0, 0.7)
 	elif stance == "hunting":
 		line_colour = Color(0.0, 1.0, 0.0, 0.7)
-	draw_line(Vector2(), target_pos - global_position, line_colour, 3)
+	draw_line(Vector2(), target_pos - position, line_colour, 3)
 	
 	draw_circle(Vector2(), DETECTION_RADIUS, line_colour - Color(0.0, 0.0, 0.0, 0.5))
 

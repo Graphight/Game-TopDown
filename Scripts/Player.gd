@@ -4,6 +4,13 @@ extends KinematicBody2D
 export var MOVE_SPEED = 100
 export var SPRINT_MULTIPLIER = 1.75
 
+onready var gun = $Gun
+
+
+func _ready():
+	gun.MAG_SIZE = 100
+	gun.FIRE_RATE = 10
+
 
 func _process(delta):
 	look_at(get_global_mouse_position())
@@ -26,6 +33,9 @@ func _physics_process(delta):
 		speed = MOVE_SPEED * SPRINT_MULTIPLIER
 	else:
 		speed = MOVE_SPEED
+	
+	if Input.is_action_pressed("shoot"):
+		$Gun.fire_gun()
 	
 	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
 
