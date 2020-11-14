@@ -1,0 +1,53 @@
+{
+	"pistol": {
+		"bullet_speed": 250,
+		"bullet_damage": 5,
+		"fire_rate": 5, 	
+		"mag_size": 12,
+		"reload_time": 1, 	
+		"bullet_shots": 1,
+		"bullet_spread": 0,
+		"mode": "single"
+	},
+	"smg": {
+		"bullet_speed": 250,
+		"bullet_damage": 1,
+		"fire_rate": 15, 	
+		"mag_size": 50,
+		"reload_time": 1, 	
+		"bullet_shots": 1,
+		"bullet_spread": 0,
+		"mode": "single"
+	},
+	"shotgun": {
+		"bullet_speed": 250,
+		"bullet_damage": 1,
+		"fire_rate": 2, 	
+		"mag_size": 6,
+		"reload_time": 1.5, 	
+		"bullet_shots": 7,
+		"bullet_spread": 30,
+		"mode": "spread"
+	},
+	"sniper": {
+		"bullet_speed": 800,
+		"bullet_damage": 10,
+		"fire_rate": 1.5, 	
+		"mag_size": 6,
+		"reload_time": 1, 	
+		"bullet_shots": 1,
+		"bullet_spread": 0,
+		"mode": "single"
+	},
+	"assault": {
+		"bullet_speed": 400,
+		"bullet_damage": 7,
+		"fire_rate": 1.5, 	
+		"mag_size": 12,
+		"reload_time": 1, 	
+		"bullet_shots": 3,
+		"bullet_spread": 0,
+		"mode": "burst"
+	}
+	
+}
