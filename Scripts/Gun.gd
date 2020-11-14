@@ -2,8 +2,8 @@ extends Node2D
 
 export var BULLET_SPEED = 200
 export var BULLET_DAMAGE = 1
-export var FIRE_RATE = 3 # Attacks per second
-export var MAG_SIZE = 12
+export var FIRE_RATE = 10 # Attacks per second
+export var MAG_SIZE = 100
 export var RELOAD_TIME = 1 # Time in seconds
 
 onready var muzzle = $Muzzle
