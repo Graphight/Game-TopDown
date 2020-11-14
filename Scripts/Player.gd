@@ -4,12 +4,20 @@ extends KinematicBody2D
 export var MOVE_SPEED = 100
 export var SPRINT_MULTIPLIER = 1.75
 
+var possible_guns = [
+	"pistol",
+	"smg",
+	"shotgun",
+	"sniper",
+	"assault"
+]
+var current_index = 0
+
 onready var gun = $Gun
 
 
 func _ready():
-	gun.MAG_SIZE = 100
-	gun.FIRE_RATE = 10
+	gun.load_base_stats("pistol")
 
 
 func _process(delta):
@@ -36,6 +44,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		$Gun.fire_gun()
+	
+	if Input.is_action_just_pressed("cycle_weapon"):
+		current_index += 1
+		if current_index >= len(possible_guns):
+			current_index = 0
+		var gun_name = possible_guns[current_index]
+		print("Switching to " + gun_name)
+		gun.load_base_stats(possible_guns[current_index])
 	
 	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
 
