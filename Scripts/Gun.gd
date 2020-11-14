@@ -43,21 +43,23 @@ func fire_gun():
 	if can_fire:
 		can_fire = false
 		
-		if current_mag <= 0:
+	
+		if GUN_MODE == "spread":
+			for bullet in range(BULLET_SHOTS):
+				var offset = (BULLET_SPREAD / 2) - (((bullet - 1) * BULLET_SPREAD) / (BULLET_SHOTS - 1))
+				spawn_bullet(offset)
+		elif GUN_MODE == "burst":
+			for bullet in range(BULLET_SHOTS):
+				yield(get_tree().create_timer(0.05), "timeout")
+				spawn_bullet(0)
+		else:
+			spawn_bullet(0)
+		current_mag -= 1
+		
+		if current_mag <= 0: 
 			yield(get_tree().create_timer(RELOAD_TIME), "timeout")
 			current_mag = MAG_SIZE
 		else:
-			if GUN_MODE == "spread":
-				for bullet in range(BULLET_SHOTS):
-					var offset = (BULLET_SPREAD / 2) - (((bullet - 1) * BULLET_SPREAD) / (BULLET_SHOTS - 1))
-					spawn_bullet(offset)
-			elif GUN_MODE == "burst":
-				for bullet in range(BULLET_SHOTS):
-					yield(get_tree().create_timer(0.05), "timeout")
-					spawn_bullet(0)
-			else:
-				spawn_bullet(0)
-			current_mag -= 1
 			yield(get_tree().create_timer(1.0 / FIRE_RATE), "timeout")
 		
 		can_fire = true

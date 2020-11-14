@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 export var MOVE_SPEED = 50
 export var DETECTION_RADIUS = 160
-export var MAX_HIT_POINTS = 10
+export var MAX_HIT_POINTS = 10.0
 
 onready var sensor = $Sensor
 onready var hp_bar = $HP_bar
