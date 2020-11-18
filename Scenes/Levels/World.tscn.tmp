@@ -16,13 +16,6 @@ tile_data = PoolIntArray( -1572910, 0, 0, -1572909, 0, 0, -1572908, 0, 0, -15729
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 586.098, 294.062 )
-MOVE_SPEED = null
-DETECTION_RADIUS = null
-LEVEL = null
-BASE_HP = null
-BASE_ARMOUR = null
-HP_SCALING = null
-ARMOUR_SCALING = null
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 243.475, 286.926 )

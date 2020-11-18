@@ -3,7 +3,11 @@ extends KinematicBody2D
 
 export var MOVE_SPEED = 50
 export var DETECTION_RADIUS = 160
-export var MAX_HIT_POINTS = 10.0
+export var LEVEL = 1
+export var BASE_HP = 100.0
+export var BASE_ARMOUR = 5.0
+export var HP_SCALING = 50.0
+export var ARMOUR_SCALING = 0.6
 
 onready var sensor = $Sensor
 onready var hp_bar = $HP_bar
@@ -13,12 +17,13 @@ var target = null
 var stance = "idle"
 var vec_to_target = Vector2()
 var additional_forces = Vector2()
-var current_hit_points = MAX_HIT_POINTS
+var current_hit_points = BASE_HP + (HP_SCALING*(LEVEL - 1.0))
+var armour = BASE_ARMOUR + (ARMOUR_SCALING*(LEVEL - 1.0)^(1.5))
 
 
 func _ready():
-	hp_bar.max_value = MAX_HIT_POINTS
-	hp_bar.value = MAX_HIT_POINTS
+	hp_bar.max_value = BASE_HP + (HP_SCALING*(LEVEL - 1.0))
+	hp_bar.value = BASE_HP + (HP_SCALING*(LEVEL - 1.0))
 	set_process(true)
 
 
@@ -66,7 +71,7 @@ func kill():
 
 func damage(value, bullet_force):
 	additional_forces = bullet_force
-	current_hit_points -= value
+	current_hit_points -= value * (150.0/(150.0+armour))
 	hp_bar.value = current_hit_points
 	if current_hit_points <= 0:
 		kill()
