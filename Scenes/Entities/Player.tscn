@@ -42,11 +42,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentState" type="Label" parent="HUD"]
-margin_left = -28.9028
-margin_top = -40.4031
-margin_right = 30.0972
-margin_bottom = -10.4031
+[node name="CurrentMovement" type="Label" parent="HUD"]
+margin_left = -50.0
+margin_top = -30.0
+margin_right = 50.0
+margin_bottom = -10.0062
+custom_fonts/font = SubResource( 2 )
+text = "IDLE"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentAction" type="Label" parent="HUD"]
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = -35.7661
 custom_fonts/font = SubResource( 2 )
 text = "IDLE"
 align = 1
@@ -57,13 +71,13 @@ __meta__ = {
 }
 
 [node name="CurrentGun" type="Label" parent="HUD"]
-margin_left = -93.8989
-margin_top = 8.20375
-margin_right = 12.1011
-margin_bottom = 38.2037
+margin_left = -50.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 30.0
 custom_fonts/font = SubResource( 2 )
 text = "PLACEHOLDER"
-align = 2
+align = 1
 valign = 1
 uppercase = true
 __meta__ = {
@@ -71,10 +85,10 @@ __meta__ = {
 }
 
 [node name="CurrentAmmo" type="Label" parent="HUD"]
-margin_left = 15.7331
-margin_top = 8.35355
-margin_right = 50.7331
-margin_bottom = 38.3536
+margin_left = -25.0
+margin_top = 30.0
+margin_right = 25.0
+margin_bottom = 50.0
 custom_fonts/font = SubResource( 2 )
 text = "0"
 align = 1

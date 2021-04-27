@@ -18,7 +18,8 @@ var is_sprinting = false
 
 onready var gun = $Gun
 onready var sprite = $Sprite
-onready var current_state = $HUD/CurrentState
+onready var current_movement = $HUD/CurrentMovement
+onready var current_action = $HUD/CurrentAction
 onready var current_gun = $HUD/CurrentGun
 onready var current_ammo = $HUD/CurrentAmmo
 
@@ -58,10 +59,6 @@ func _handle_movement_input(delta):
 
 
 func _handle_action_inputs():
-	if Input.is_action_pressed("shoot"):
-		gun.fire_gun()
-		current_ammo.text = str(gun.current_mag)
-	
 	if Input.is_action_just_pressed("cycle_weapon"):
 		current_index += 1
 		if current_index >= len(possible_guns):
@@ -71,10 +68,15 @@ func _handle_action_inputs():
 		gun.load_base_stats(possible_guns[current_index])
 		current_gun.text = gun_name
 		current_ammo.text = str(gun.MAG_SIZE)
-	
-	if Input.is_action_just_pressed("reload"):
-		gun.reload_gun()
 
 
-func update_state(new_state):
-	current_state.text = new_state
+func update_movement_display(new_state):
+	current_movement.text = new_state
+
+
+func update_action_display(new_state):
+	current_action.text = new_state
+
+
+func update_ammo_display():
+	current_ammo.text = str(gun.current_mag)

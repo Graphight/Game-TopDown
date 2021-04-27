@@ -1,7 +1,6 @@
 extends StateMachine
 
 
-
 func _ready():
 	add_state("idle")
 	add_state("running")
@@ -17,21 +16,21 @@ func _get_transition(delta):
 	match state:
 		states.idle:
 			if parent.move_vec != Vector2(0, 0):
-				parent.update_state("RUNNING")
+				parent.update_movement_display("RUNNING")
 				return states.running
 		states.running:
 			if parent.is_sprinting == true:
-				parent.update_state("SPRINITNG")
+				parent.update_movement_display("SPRINITNG")
 				return states.sprinting
 			elif parent.move_vec == Vector2(0, 0):
-				parent.update_state("IDLE")
+				parent.update_movement_display("IDLE")
 				return states.idle
 		states.sprinting:
 			if parent.is_sprinting == false:
-				parent.update_state("RUNNING")
+				parent.update_movement_display("RUNNING")
 				return states.running
 			elif parent.move_vec == Vector2(0, 0):
-				parent.update_state("IDLE")
+				parent.update_movement_display("IDLE")
 				return states.idle
 
 
@@ -42,7 +41,3 @@ func _enter_state(new_state, old_state):
 			pass
 		states.running:
 			pass
-
-
-func _exit_state(old_state, new_state):
-	pass
