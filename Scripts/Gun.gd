@@ -14,6 +14,7 @@ onready var muzzle = $Muzzle
 var projectile = preload("res://Scenes/Misc/Projectile.tscn")
 
 var can_fire = true
+var reloading = false
 var current_mag = MAG_SIZE
 
 
@@ -43,9 +44,12 @@ func fire_gun():
 	if can_fire:
 		can_fire = false
 		
-		if current_mag <= 0:
+		if current_mag <= 0: 
+			# I know it is gross but calling reload_gun is not blocking the thread
+			reloading = true
 			yield(get_tree().create_timer(RELOAD_TIME), "timeout")
 			current_mag = MAG_SIZE
+			reloading = false
 		else:
 			if GUN_MODE == "spread":
 				for bullet in range(BULLET_SHOTS):
@@ -61,6 +65,15 @@ func fire_gun():
 			yield(get_tree().create_timer(1.0 / FIRE_RATE), "timeout")
 		
 		can_fire = true
+
+
+func reload_gun():
+	reloading = true
+	can_fire = false
+	yield(get_tree().create_timer(RELOAD_TIME), "timeout")
+	current_mag = MAG_SIZE
+	reloading = false
+	can_fire = true
 
 
 func spawn_bullet(offset):

@@ -12,21 +12,31 @@ var possible_guns = [
 	"assault"
 ]
 var current_index = 0
+var move_vec = Vector2(0, 0)
+
+var is_sprinting = false
 
 onready var gun = $Gun
+onready var sprite = $Sprite
+onready var current_state = $HUD/CurrentState
+onready var current_gun = $HUD/CurrentGun
+onready var current_ammo = $HUD/CurrentAmmo
 
 
 func _ready():
 	gun.load_base_stats("pistol")
+	current_gun.text = possible_guns[current_index]
+	current_ammo.text = str(gun.current_mag)
 
 
 func _process(delta):
-	look_at(get_global_mouse_position())
+	sprite.look_at(get_global_mouse_position())
+	gun.look_at(get_global_mouse_position())
 
 
-func _physics_process(delta):
+func _handle_movement_input(delta):
 	var speed = MOVE_SPEED
-	var move_vec = Vector2()
+	move_vec = Vector2(0, 0)
 	if Input.is_action_pressed("move_up"):
 		move_vec.y -= 1
 	if Input.is_action_pressed("move_down"):
@@ -38,12 +48,19 @@ func _physics_process(delta):
 	move_vec = move_vec.normalized()
 	
 	if Input.is_action_pressed("sprint"):
+		is_sprinting = true
 		speed = MOVE_SPEED * SPRINT_MULTIPLIER
 	else:
+		is_sprinting = false
 		speed = MOVE_SPEED
 	
+	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
+
+
+func _handle_action_inputs():
 	if Input.is_action_pressed("shoot"):
-		$Gun.fire_gun()
+		gun.fire_gun()
+		current_ammo.text = str(gun.current_mag)
 	
 	if Input.is_action_just_pressed("cycle_weapon"):
 		current_index += 1
@@ -52,8 +69,12 @@ func _physics_process(delta):
 		var gun_name = possible_guns[current_index]
 		print("Switching to " + gun_name)
 		gun.load_base_stats(possible_guns[current_index])
+		current_gun.text = gun_name
+		current_ammo.text = str(gun.MAG_SIZE)
 	
-	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
+	if Input.is_action_just_pressed("reload"):
+		gun.reload_gun()
 
 
-
+func update_state(new_state):
+	current_state.text = new_state
