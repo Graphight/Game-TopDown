@@ -48,7 +48,7 @@ func fire_gun():
 			var offset = (BULLET_SPREAD / 2) - (((bullet - 1) * BULLET_SPREAD) / (BULLET_SHOTS - 1))
 			spawn_bullet(offset)
 	elif GUN_MODE == "burst":
-		for bullet in range(BULLET_SHOTS):
+		for _bullet in range(BULLET_SHOTS):
 			yield(get_tree().create_timer(0.05), "timeout")
 			spawn_bullet(0)
 	else:

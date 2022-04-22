@@ -30,7 +30,7 @@ func _ready():
 	current_ammo.text = str(gun.current_mag)
 
 
-func _process(delta):
+func _process(_delta):
 	sprite.look_at(get_global_mouse_position())
 	gun.look_at(get_global_mouse_position())
 
@@ -55,7 +55,7 @@ func _handle_movement_input(delta):
 		is_sprinting = false
 		speed = MOVE_SPEED
 	
-	var collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
+	var _collision_entity = move_and_collide(move_vec * speed * delta, false, true, false)
 
 
 func _handle_action_inputs():
