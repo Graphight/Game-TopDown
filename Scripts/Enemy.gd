@@ -32,6 +32,7 @@ func _physics_process(delta):
 		vec_to_target = target_pos - global_position
 		# Update target position to continue following
 		target_pos = target.position
+		target_pos = target.position
 	elif stance == "hunting":
 		# Move toward last seen place of target then stop
 		if target_pos.distance_to(position) > 1:
@@ -47,6 +48,10 @@ func _physics_process(delta):
 	vec_to_target = vec_to_target.normalized()
 	
 	var collision_entity = move_and_collide(vec_to_target * MOVE_SPEED * delta, false, true, false)
+
+
+func _handle_movement(delta):
+	var _collision_entity = move_and_collide(vec_to_target * MOVE_SPEED * delta, false, true, false)
 
 
 func _draw():
